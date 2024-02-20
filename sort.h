@@ -35,6 +35,6 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 listint_t *swap_node(listint_t *node, listint_t **list);
 void swap(int a, int b);
-void swap(int a, int b);
+void swap_ints(int *a, int *b)
 
 #endif
