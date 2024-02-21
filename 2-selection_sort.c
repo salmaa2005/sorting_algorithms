@@ -1,40 +1,44 @@
 #include "sort.h"
 
 /**
- * selection_sort - Sort a given array using the Bubble
- * sort algorithm in the ascending order.
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
+ */
+void swap_ints(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+/**
+ * selection_sort - Sort an array of integers in ascending order
+ *                  using the selection sort algorithm.
+ * @array: An array of integers.
+ * @size: The size of the array.
  *
- * @array: The array to be sorted.
- * @size: The size of @array.
- *
- **/
+ * Description: Prints the array after each swap.
+ */
 void selection_sort(int *array, size_t size)
 {
-	size_t min_value_index = 0;
-	size_t pass = 0, index = 0;
-	size_t passes_required = 0;
-	int temp = 0;
+	int *min;
+	size_t i, j;
 
 	if (array == NULL || size < 2)
-	{
 		return;
-	}
-	passes_required = size - 1;
-	for (pass = 0; pass < passes_required; pass++)
+
+	for (i = 0; i < size - 1; i++)
 	{
-		min_value_index = pass;
-		for (index = pass + 1; index < size; index++)
+		min = array + i;
+		for (j = i + 1; j < size; j++)
+			min = (array[j] < *min) ? (array + j) : min;
+
+		if ((array + i) != min)
 		{
-			if (array[index] < array[min_value_index])
-			{
-				min_value_index = index;
-			}
-		}
-		temp = array[pass];
-		array[pass] = array[min_value_index];
-		array[min_value_index] = temp;
-		if (min_value_index > pass)
-		{
+			swap_ints(array + i, min);
 			print_array(array, size);
 		}
 	}
