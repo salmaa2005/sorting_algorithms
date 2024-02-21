@@ -1,31 +1,31 @@
 #include "sort.h"
-
 /**
- * selection_sort - sort list with selection_sort
- * @array: The array to be printed
- * @size: Number of elements in @array
+ * selection_sort - selection sort algorithm
+ * @array: array to sort
+ * @size: size of array
  */
 void selection_sort(int *array, size_t size)
 {
-	size_t i, c, less, tmp, swap;
+	size_t i, i2;
+	int min, tmp, idx;
 
-	if (array == NULL)
-		return;
 	for (i = 0; i < size; i++)
 	{
-		for (less = i, c = i; c < size; c++)
-			if (array[c] < array[less])
-			{
-				less = c;
-				swap = 1;
-			}
-		if (swap == 1)
+		min = array[i];
+		for (i2 = i + 1; i2 < size; i2++)
 		{
-			tmp = array[less];
-			array[less] = array[i];
-			array[i] = tmp;
+			if (min > array[i2])
+			{
+				min = array[i2];
+				idx = i2;
+			}
+		}
+		if (min != array[i])
+		{
+			tmp = array[i];
+			array[i] = min;
+			array[idx] = tmp;
 			print_array(array, size);
-			swap = 0;
 		}
 	}
 }
